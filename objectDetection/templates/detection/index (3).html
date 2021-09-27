@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Dashboard</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="dummy"></div>
+			<h2>Vision Based Inspection System</h2>
+            <img style="height: 60%; width: 200px;" class="abp_logo" src="./images/abp_logo.png" alt="ABP Logo">
+        </header>
+        <div class="contents">
+            <div class="left">
+                <div class="dropDownNameContainer">
+                    <div class="nameContainer" onclick="openDropDown()">
+                        <h3 id="partName">Part Number</h3>
+                        <i class="fa fa-chevron-circle-down"></i>
+                    </div>
+                    <div id="nameDropDown" class="dropDownContent">
+                        <h3 id="1">5QP 959 811</h3>
+                        <h3 id="2">5QP 959 812</h3>
+                    </div>
+                </div>
+                <div class="numberContainer">
+                    <h3 id="partNumber">Part Name</h3>
+                </div>
+            </div>
+            <div class="dateContainer">
+                <h3 id="currentDate"></h3>
+            </div>
+            <div class="dummyForFooter">
+                
+            </div>
+        </div>
+        <div class="videoSection">
+            <div class="liveVideoContainer">
+                <h3>Live</h3>
+                <img id="liveImg" src="./images/object1.jpeg" alt="Object Image">
+            </div>
+            <div class="previewVideoContainer">
+                <h3>Preview</h3>
+                <img id="previewImg" src="./images/object1.jpeg" alt="Object Image"> 
+            </div>
+            <footer>
+                <div class="okContainer">
+                    <h3>Ok</h3>
+                </div>
+                <div class="notOkContainer">
+                    <h3>Not Ok</h3>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

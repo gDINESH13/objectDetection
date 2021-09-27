@@ -50,12 +50,12 @@ category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABE
 
 warnings.filterwarnings('ignore')   # Suppress Matplotlib warnings
 
-loc='E:/NewDjangoProjects/object detection/objectDetection/static'
+loc='E:/NewDjangoProjects/object detection/objectDetection/static/images/'
 
 def detect(file):
-  
+  print("file List objectdetection")
   print(file)
-  image = cv2.imread(f"{loc}{file[0]}")
+  image = cv2.imread(loc+f"{file}")#{loc}
   image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
   image_expanded = np.expand_dims(image_rgb, axis=0)
   # The input needs to be a tensor, convert it using `tf.convert_to_tensor`.
@@ -95,8 +95,11 @@ def detect(file):
   # cv2.imshow("window",image_with_detections)
   # cv2.waitKey(0)
   # CLOSES WINDOW ONCE KEY IS PRESSED
-  os.chdir(loc+'/images')
-  fileName=f"result-{file[1]}"
+  os.chdir(loc)
+  if not os.path.exists('results'):
+    os.makedirs('results')
+  os.chdir(loc+'results/')
+  fileName=f"result-{file}"
   cv2.imwrite(fileName,image_with_detections)
 
   

@@ -5,31 +5,32 @@ from .models import *
 from .forms import *
 from .ObjectDetection import detect
 from django.core.files.storage import FileSystemStorage
+import os
+from django.conf.urls.static import static
+from django.conf import settings
+
+
 
 def clearAll(request):
     return render(request,'detection/home.html')
 # Create your views here.
 def detection(request):
-    
-    if request.method=="POST":
-        form=NameForm(request.POST,request.FILES)
-        if form.is_valid():
-            # print(form.cleaned_data['docFile'])
-            # img=detectionHistory(rawImage=form.cleaned_data['docFile'])
-            # img.save()
-            # print(img.rawImage.url)
-            image=form.cleaned_data['docFile']
-            fs=FileSystemStorage()
-            filePath=fs.save(image.name,image)
-            fileName=fs.url(filePath)
-            file=[fileName,image.name]
-            detect(file)
-            resImg=fs.open(f"result-{image.name}")
-            resFilePath=fs.url(resImg)
-            return render(request,'detection/home.html',{'filePath':resFilePath,'form':NameForm})
-        return HttpResponseRedirect(reverse('detection'))
-    
+    imageUrls=[]
+    fs=FileSystemStorage()
+    if os.path.exists('E:/NewDjangoProjects/object detection/objectDetection/static/images/results'):
+        #print("yes Images of Results exits")
+        for i in range(1,11):
+            resImg=fs.open(f"results/result-{i}.jpg")
+            imageUrls.append(fs.url(resImg))
+
     else:
-        
-        return render(request,'detection/Home.html',{'form':NameForm,})
+        for i in range(1,11):
+            detect(f"{i}.jpg") 
+            resImg=fs.open(f"results/result-{i}.jpg")
+            imageUrls.append(fs.url(resImg))
+    
+    del fs
+    
+    return render(request,'detection/Home.html',{'form':NameForm,"Images":imageUrls[1:],"FirstImage":imageUrls[0]})
+    #return render(request,'detection/Home.html',{'form':NameForm,"image":fs.url(resImg)})
 

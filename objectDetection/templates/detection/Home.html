@@ -2,6 +2,14 @@
 <!DOCTYPE html>
 <head>
     <title>Imgge test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script>
+        window.initializeCarousel=()=>{
+            $("#DetectedImageContainer").carousel({interval:100})
+        }
+    </script>
     <style>
         .rawImage,.resImage{
             width: 40%;
@@ -13,10 +21,30 @@
             width: 100%;
             height:100%;
         }
+        .carousel-inner img{
+            width:400px;
+            height: 400px;
+        }
         
     </style>
 </head>
 <body>
+    <div id="DetectedImageContainer" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{FirstImage}}" class="d-block w-100" alt="...">
+            </div>
+            {% for image in Images%}
+                <div class="carousel-item ">
+                    <img src="{{image}}" class="d-block w-100" alt="...">
+                </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+    <!-- <div class="width:50%;height:50%">
+        <img src="{{image}}" class="d-block w-100" alt="...">
+    </div> -->
     
     {% if filePath %}
     <div class="rawImage">
